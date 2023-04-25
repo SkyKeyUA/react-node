@@ -2,6 +2,8 @@
 
 import express from 'express';
 import multer from 'multer';
+// node.js is blocked by other domains, cors is the unlock blocked
+import cors from 'cors';
 
 import mongoose from 'mongoose';
 
@@ -32,6 +34,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use(express.json());
+app.use(cors());
 //check the folder "uploads" on files
 app.use('/uploads', express.static('uploads'));
 
