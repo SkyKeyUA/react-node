@@ -23,7 +23,7 @@ export const getLastTags = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const posts = await PostModel.find().populate('user').exec();
+    const posts = await PostModel.find().populate('user', '-passwordHash').exec();
 
     res.json(posts);
   } catch (error) {
@@ -42,7 +42,7 @@ export const getOne = async (req, res) => {
       { _id: postId },
       { $inc: { viewsCount: 1 } },
       { new: true },
-    ).populate('user');
+    ).populate('user', '-passwordHash');
 
     if (!doc) {
       return res.status(404).json({
