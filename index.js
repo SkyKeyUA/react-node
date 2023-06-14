@@ -1,5 +1,7 @@
 /** @format */
 
+import 'dotenv/config';
+
 import express from 'express';
 import multer from 'multer';
 // node.js is blocked by other domains, cors is the unlock blocked
@@ -14,7 +16,7 @@ import { checkAuth, handleValidationErrors } from './utils/index.js';
 import { register, login, getMe, PostController } from './controllers/index.js';
 
 mongoose
-  .connect(process.env.DB)
+  .connect(process.env.DB_URL)
   .then(() => console.log('DB ok'))
   .catch((err) => console.log('DB error', err));
 
