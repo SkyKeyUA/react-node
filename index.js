@@ -14,13 +14,13 @@ import { checkAuth, handleValidationErrors } from './utils/index.js';
 import { register, login, getMe, PostController } from './controllers/index.js';
 
 mongoose
-  .connect(
-    'mongodb+srv://admin:wwwwww@cluster0.uwfufvo.mongodb.net/blog?retryWrites=true&w=majority',
-  )
+  .connect(process.env.DB)
   .then(() => console.log('DB ok'))
   .catch((err) => console.log('DB error', err));
 
 const app = express();
+
+const port = process.env.PORT || 3000;
 
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
@@ -63,7 +63,7 @@ app.patch(
   PostController.update,
 );
 
-app.listen(4444, (err) => {
+app.listen(port, (err) => {
   if (err) {
     return console.log(err);
   }
